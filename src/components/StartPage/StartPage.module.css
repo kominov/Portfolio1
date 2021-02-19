@@ -1,0 +1,14 @@
+.radio{
+    margin-top: 25px;
+}
+/* .radio__wrapper{
+    
+} */
+.radio__label{
+    margin: 0 auto;
+    display:block;
+    width: 50%;
+  }
+  .next__btn{
+      margin-top: 100px;
+  }
