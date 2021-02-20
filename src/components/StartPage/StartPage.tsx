@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Identificator } from '../Idetnificator/Identificator';
 import s from "./StartPage.module.css"
+import classNames from 'classnames';
 import { useHistory } from 'react-router-dom'
 
 
@@ -10,20 +11,18 @@ export const StartPage: React.FC = () => {
         data = "data"
     }
     const history = useHistory();
-    let btn = "btn-secondary";
     const [docType, setDocType] = useState<DocType>();
-    const [docError, setDocError] = useState(false);
-    if (docType) btn = "btn-primary";
+    const buttonStyle = classNames('btn', s.next__btn,{
+        ["btn-secondary"]: !docType,
+        ["btn-primary"]: !!docType
+    })
 
     function handleClick() {
-        if (!docType) {
-            setDocError(true);
-            return;
-        }
-        if (docType == "data") { }
-        if (docType == "identificator") {
-            history.push('/identificator')
-        }
+       
+        
+        if (docType == "data") history.push('/data')
+        if (docType == "identificator") history.push('/identificator')
+
     }
     return (
         <>
@@ -38,7 +37,7 @@ export const StartPage: React.FC = () => {
                     <label className={`btn btn-outline-primary ${s.radio__label}`} htmlFor="btnradio2">Заполнить информацию о позиции</label>
                 </div>
             </div>
-            <button className={`btn ${btn}  ${s.next__btn}`} onClick={handleClick}>Далее</button>
+            <button disabled={!docType} className={buttonStyle} onClick={handleClick}>Далее</button>
         </>
     )
 }

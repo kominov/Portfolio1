@@ -1,25 +1,28 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { IId } from '../../interfaces';
+import classNames from 'classnames';
 import s from './Identificator.module.css'
 
 export const Identificator: React.FC = () => {
     const refId = useRef<HTMLInputElement>(null);
     const [id, setId] = useState<IId[]>([])
+    
+
     //проверяем есть ли что-то в сторедже, если есть, добавляем в стейт
     useEffect(() => {
         const saveId = JSON.parse(localStorage.getItem('identificator') || '[]') as IId[];
         setId(saveId);
     }, [])
     //записываем в сторедж стейт, при добавление в него айди
-    useEffect(()=>{
+    useEffect(() => {
         localStorage.setItem('identificator', JSON.stringify(id))
-    },[id])
+    }, [id])
     //добавляем ид 
     const addHandlerId = (identificator: string) => {
         const newId = {
             identificator: identificator,
-            id: Date.now(),
+            key: Date.now(),
             complited: false,
         }
         setId(prev => [newId, ...id]);
@@ -27,7 +30,7 @@ export const Identificator: React.FC = () => {
 
     //удаляем ид
     const delHandlerId = (id: number, event: React.MouseEvent) => {
-        setId(prev => prev.filter(item => item.id !== id))
+        setId(prev => prev.filter(item => item.key !== id))
     }
 
     //обрабатываем нажатие интера, и вызываем функцию для добавления ид
@@ -47,7 +50,7 @@ export const Identificator: React.FC = () => {
                     </div>
                     <input type="text"
                         ref={refId}
-                        className="form-control "
+                        className="form-control"
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default"
                         placeholder="Введите идентификатор"
@@ -56,12 +59,12 @@ export const Identificator: React.FC = () => {
             </div>
             {id.map(items => {
                 return (
-                    <div className={s.id__item} key={items.id}>
+                    <div className={s.id__item} key={items.key}>
                         <span className="alert alert-dark" role="alert">
                             Идентификатор: {items.identificator}
                         </span>
                         <i className={`material-icons ${s.id__icon}`}
-                            onClick={event => delHandlerId(items.id, event)}
+                            onClick={event => delHandlerId(items.key, event)}
                         >delete</i>
                     </div>
 

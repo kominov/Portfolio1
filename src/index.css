@@ -6,10 +6,16 @@
 .form-control{
     border-color: #0d6efd;
 }
+.id__red{
+    border: 1px solid red;
+}
 
 .alert{
     padding: 6px 25px;
     width: 100%;
     margin-bottom: 0;
     border: 1px solid #0d6efd;
+}
+.data__span{
+    min-width: 130px;
 }
