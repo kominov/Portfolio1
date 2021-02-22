@@ -3,9 +3,9 @@ export interface IId {
     key: number
     complited: boolean
 }
-// export interface IData {
-//     [name: string]: string
-//     amount: string
-//     cost: string
-//     // key:number
-// }
+export interface IData {
+    name: string
+    amount: string
+    cost: string
+    key:number
+}

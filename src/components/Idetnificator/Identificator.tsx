@@ -27,7 +27,7 @@ export const Identificator: React.FC = () => {
         }
         setId(prev => [newId, ...id]);
     }
-
+    console.log(id)
     //удаляем ид
     const delHandlerId = (id: number, event: React.MouseEvent) => {
         setId(prev => prev.filter(item => item.key !== id))
