@@ -1,36 +1,55 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { IData } from '../../interfaces';
+import { IData, IDataErrors } from '../../interfaces';
 import s from './Data.module.css'
+import classNames from 'classnames'
 export const Data: React.FC = () => {
+
     //стейт для инпутов
-    const [dataInput, setDataInput] = useState({
-        name: "",
-        amount: "",
-        cost: ""
+    const [dataInput, setDataInput] = useState<IData>({
+        name: "", amount: "", cost: "", key: Date.now(),
     });
+
     // стейт для отрисовывания 
-    const [dataDraw, setDataDraw] = useState<IData[]>([])
+    const [dataDraw, setDataDraw] = useState<IData[]>([]);
 
-    const HandlerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //стейт для валидации
+    const [errors, setErrors] = useState<IDataErrors>({
+        errorMessage: "", validation: false
+    })
+
+    // обрабатываем инпуты
+    const handlerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setDataInput({ ...dataInput, [name]: value })
+        setDataInput({ ...dataInput, [name]: value });
+        validateInputValue(name, value);
     }
 
-
+    //по нажатию на кнопку обнуляем инпуты, а из значение записываем в стейт
     const addDataHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const newDataDraw = {
-            name: dataInput.name,
-            amount: dataInput.amount,
-            cost: dataInput.cost,
-            key: Date.now()
-        }
-        setDataDraw(pref => [newDataDraw, ...dataDraw]);
-        setDataInput({ name: "", cost: "", amount: "" });
+        setDataDraw(prev => [dataInput, ...prev]);
+        setDataInput({ name: "", cost: "", amount: "", key: Date.now() });
     }
+
+    const validateInputValue = (inputName: string, inputValue: string) => {
+        let errorMessage = errors.errorMessage;
+        let validationValue = errors.validation;
+
+        validationValue = inputValue.length > 6;
+        errorMessage = validationValue ? '' : 'слишком короткое значение';
+        setErrors({
+            errorMessage: errorMessage,
+            validation: validationValue,
+        });
+    }
+    const classError = classNames("form-control data__input",{
+        ["is-invalid"]: !errors.validation,
+        ["is-valid"]: !!errors.validation
+
+    })
+    // console.log(errors.validation);
 
     return (
         <div className={s.data__inner}>
-            {/* {data?<button onClick ={()=> setData({name: "", cost: "", amount: ""} )} > добавить</button> : <s.data__inner/>} */}
             <h3>Черновик</h3>
             <div className="s data__information">
                 <div className="input-group mb-3">
@@ -40,9 +59,9 @@ export const Data: React.FC = () => {
                     <input type="text"
                         value={dataInput.name}
                         placeholder="Введите название"
-                        className="form-control data__input"
+                        className={classError}
                         name="name"
-                        onChange={HandlerInput} />
+                        onChange={handlerInput} />
                 </div>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -54,7 +73,7 @@ export const Data: React.FC = () => {
                         value={dataInput.amount}
                         className="form-control data__input"
                         name="amount"
-                        onChange={HandlerInput} />
+                        onChange={handlerInput} />
                 </div>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -66,11 +85,11 @@ export const Data: React.FC = () => {
                         value={dataInput.cost}
                         className="form-control data__input"
                         name="cost"
-                        onChange={HandlerInput} />
+                        onChange={handlerInput} />
                 </div>
             </div>
             <button
-                disabled={dataInput.name.length === 0}
+                disabled={dataInput.name.length <= 4}
                 className="btn btn-primary"
                 onClick={addDataHandler}>Добавить</button>
 
@@ -96,7 +115,6 @@ export const Data: React.FC = () => {
                                     <td>{dataDraw.name}</td>
                                     <td>{dataDraw.cost}</td>
                                     <td>{dataDraw.amount}</td>
-                                    {console.log(dataDraw)}
                                 </tr>
                             )))}
                     </tbody>

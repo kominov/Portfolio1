@@ -7,5 +7,9 @@ export interface IData {
     name: string
     amount: string
     cost: string
-    key:number
+    key: number
+}
+export interface IDataErrors {
+    errorMessage: string 
+    validation: boolean
 }
