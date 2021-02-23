@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IData, IDataErrors } from '../../interfaces';
 import s from './Data.module.css'
 import classNames from 'classnames'
+import {useHistory} from 'react-router-dom'
 export const Data: React.FC = () => {
-
+    const history = useHistory();
     //стейт для инпутов
     const [dataInput, setDataInput] = useState<IData>({
         name: "", amount: "", cost: "", key: Date.now()
@@ -45,10 +46,12 @@ export const Data: React.FC = () => {
             btnValid: false
         })
     }
+    //удаляем данные из таблицы
     const deleteDataHandler = (event: React.MouseEvent, id: number) => {
-        setDataDraw(prev => prev.filter(item => item.key !==id))
+        setDataDraw(prev => prev.filter(item => item.key !== id))
     }
 
+    //проверяем импуты на соответствие
     const validateInputValue = (inputName: string, inputValue: string) => {
         let errorMessage = errors.errorMessage;
         let validationName = errors.validationName;
@@ -86,15 +89,13 @@ export const Data: React.FC = () => {
         })
 
     }
-
-
+    //Устанавливаем css свойства
     const errorClass = (touched: boolean) => {
         return (classNames({
             ["has-error "]: !touched,
             ["is-valid"]: !!touched,
         }))
     }
-    console.log(errors.btnValid)
 
     return (
         <div className={s.data__inner}>
@@ -169,12 +170,17 @@ export const Data: React.FC = () => {
                                     <td>{dataDraw.cost}</td>
                                     <td>{dataDraw.amount}</td>
                                     <td><i className={`material-icons ${s.id__icon}`}
-                                onClick={event =>deleteDataHandler(event, dataDraw.key)}>delete</i></td>
+                                        onClick={event => deleteDataHandler(event, dataDraw.key)}>delete</i></td>
                                 </tr>
                             )))}
                     </tbody>
                 </table>
-        </div>
+            </div>
+
+            <button onClick={()=>{history.push('/')}} className="m2 btn btn-primary"
+            >Назад</button>
+            <button  className="m2 btn btn-primary"
+            >Далее</button>
         </div >
     )
 }
