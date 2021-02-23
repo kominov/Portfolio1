@@ -34,8 +34,19 @@ export const Data: React.FC = () => {
     const addDataHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         setDataDraw(prev => [dataInput, ...prev]);
         setDataInput({
-            name: "", cost: "", amount: "", key: Date.now(),
+            name: "", cost: "", amount: "", key: Date.now()
         });
+        setErrors({
+            errorMessage: { name: "", amount: "", cost: "" },
+            touched: { name: false, amount: false, cost: false },
+            validationName: false,
+            validationAmount: false,
+            validationCost: false,
+            btnValid: false
+        })
+    }
+    const deleteDataHandler = (event: React.MouseEvent, id: number) => {
+        setDataDraw(prev => prev.filter(item => item.key !==id))
     }
 
     const validateInputValue = (inputName: string, inputValue: string) => {
@@ -83,9 +94,7 @@ export const Data: React.FC = () => {
             ["is-valid"]: !!touched,
         }))
     }
-    console.log(errors.errorMessage.name)
-    console.log(errors.errorMessage.amount)
-    console.log(errors.errorMessage.cost)
+    console.log(errors.btnValid)
 
     return (
         <div className={s.data__inner}>
@@ -136,12 +145,13 @@ export const Data: React.FC = () => {
                 onClick={addDataHandler}>Добавить</button>
 
             <div className={s.data__table}>
-                <table className="table table-primary">
+                <table className="table table-primary ">
                     <thead>
                         <tr>
                             <th scope="col">Название</th>
                             <th scope="col">Количество</th>
                             <th scope="col">Стоимость</th>
+                            <th scope="col">Удалить</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,17 +161,20 @@ export const Data: React.FC = () => {
                                 <td>—</td>
                                 <td>—</td>
                                 <td>—</td>
+                                <td>—</td>
                             </tr>
                             ) : (dataDraw.map(dataDraw => (
                                 <tr key={dataDraw.key}>
                                     <td>{dataDraw.name}</td>
                                     <td>{dataDraw.cost}</td>
                                     <td>{dataDraw.amount}</td>
+                                    <td><i className={`material-icons ${s.id__icon}`}
+                                onClick={event =>deleteDataHandler(event, dataDraw.key)}>delete</i></td>
                                 </tr>
                             )))}
                     </tbody>
                 </table>
-            </div>
+        </div>
         </div >
     )
 }

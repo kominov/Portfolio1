@@ -3,6 +3,8 @@
 }
 .data__table{
     margin-top: 20px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 4px;
 }
 .error__text{
     display: block;
@@ -10,4 +12,8 @@
     margin-top: .25rem;
     font-size: .875em;
     color: #dc3545;
+}
+.id__icon{
+    color: #F44336 !important;
+    cursor: pointer;
 }
