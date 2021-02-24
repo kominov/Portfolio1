@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IData, IDataErrors } from '../../interfaces';
 import s from './Data.module.css'
 import classNames from 'classnames'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 export const Data: React.FC = () => {
     const history = useHistory();
     //стейт для инпутов
@@ -22,7 +22,14 @@ export const Data: React.FC = () => {
         validationCost: false,
         btnValid: false
     })
+    useEffect(() => {
+        let save = JSON.parse(localStorage.getItem('data') || '[]') as IData[];
+        setDataDraw(save);
+    }, [])
 
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(dataDraw));
+    }, [dataDraw])
     // обрабатываем инпуты
     const handlerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -177,9 +184,9 @@ export const Data: React.FC = () => {
                 </table>
             </div>
 
-            <button onClick={()=>{history.push('/')}} className="m2 btn btn-primary"
+            <button onClick={() => { history.push('/') }} className="m2 btn btn-primary"
             >Назад</button>
-            <button  className="m2 btn btn-primary"
+            <button className="m2 btn btn-primary"
             >Далее</button>
         </div >
     )
