@@ -12,7 +12,7 @@ export const StartPage: React.FC = () => {
     }
     const history = useHistory();
     const [docType, setDocType] = useState<DocType>();
-    const buttonStyle = classNames('btn', s.next__btn,{
+    const buttonStyle = classNames('btn brd__shadow__itput', s.next__btn,{
         ["btn-secondary"]: !docType,
         ["btn-primary"]: !!docType
     })
@@ -26,10 +26,10 @@ export const StartPage: React.FC = () => {
     }
     return (
         <>
-            <h1 className="document">Черновик</h1>
+            
             <div className={s.radio__wrapper}>
                 <div className={s.radio}>
-                    <input className="btn-check" type='radio' id="btnradio1" name='doctype' onChange={() => setDocType(DocType.identificator)} />
+                    <input className=" btn-check" type='radio' id="btnradio1" name='doctype' onChange={() => setDocType(DocType.identificator)} />
                     <label className={`btn btn-outline-primary ${s.radio__label}`} htmlFor="btnradio1">Ввести идентификатор</label>
                 </div>
                 <div className={s.radio}>

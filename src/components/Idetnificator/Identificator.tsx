@@ -43,14 +43,13 @@ export const Identificator: React.FC = () => {
     return (<>
         <div className={s.id__inner}>
             <div className={s.id}>
-                <h1 className="document">Черновик</h1>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Идентификатор</span>
+                        <span className="brd__shadow__itput input-group-text bg-primary text-white" id="inputGroup-sizing-default">Идентификатор</span>
                     </div>
                     <input type="text"
                         ref={refId}
-                        className="form-control"
+                        className="brd__shadow__itput form-control"
                         aria-label="Default"
                         aria-describedby="inputGroup-sizing-default"
                         placeholder="Введите идентификатор"

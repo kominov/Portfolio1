@@ -106,42 +106,44 @@ export const Data: React.FC = () => {
 
     return (
         <div className={s.data__inner}>
-            <h3>Черновик</h3>
-            <div className="s data__information">
+            <div className={s.data__information}>
+
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Название</span>
+                        <span className="brd__shadow__itput data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Название</span>
                     </div>
-                    <input type="text"
+                    <input
+                        type="text"
                         value={dataInput.name}
                         placeholder="Введите название"
-                        required
-                        className={`form-control ${errorClass(errors.touched.name)}`}
+                        className={`brd__shadow__itput brdr__radius__input form-control data__input ${errorClass(errors.touched.name)}`}
                         name="name"
                         onChange={handlerInput} />
                     <div className={s.error__text}>{errors.errorMessage.name}</div>
                 </div>
+
+
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Количество</span>
+                        <span className="brd__shadow__itput data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Количество</span>
                     </div>
                     <input
                         type="text"
                         placeholder="Введите количество"
                         value={dataInput.amount}
-                        className={`form-control data__input  ${errorClass(errors.touched.amount)}`}
+                        className={`brd__shadow__itput form-control data__input  ${errorClass(errors.touched.amount)}`}
                         name="amount"
                         onChange={handlerInput} />
                 </div>
                 <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Cтоимость</span>
+                    <div className=" input-group-prepend">
+                        <span className="brd__shadow__itput brd_shadow data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Cтоимость</span>
                     </div>
                     <input
                         type="text"
                         placeholder="Введите сумму"
                         value={dataInput.cost}
-                        className={`form-control data__input  ${errorClass(errors.touched.cost)}`}
+                        className={`brd__shadow__itput form-control data__input  ${errorClass(errors.touched.cost)}`}
                         name="cost"
                         onChange={handlerInput} />
 
@@ -149,7 +151,7 @@ export const Data: React.FC = () => {
             </div>
             <button
                 disabled={!errors.btnValid}
-                className="btn btn-primary"
+                className=" brd__shadow__itput btn btn-primary"
                 onClick={addDataHandler}>Добавить</button>
 
             <div className={s.data__table}>
@@ -184,9 +186,9 @@ export const Data: React.FC = () => {
                 </table>
             </div>
 
-            <button onClick={() => { history.push('/') }} className="m2 btn btn-primary"
+            <button onClick={() => { history.push('/') }} className="brd__shadow__itput m2 btn btn-primary"
             >Назад</button>
-            <button className="m2 btn btn-primary"
+            <button className="brd__shadow__itput m2 btn btn-primary"
             >Далее</button>
         </div >
     )
