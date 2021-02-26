@@ -36,3 +36,8 @@
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important;
 }
+.document__span{
+    display: block;
+    min-width: 160px;
+    text-align: center;
+}

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Identificator } from './components/Idetnificator/Identificator';
 import { Data } from './components/Data/Data';
 import { Header } from './components/Header/Header';
+import { Document } from './components/Document/Document';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
           <Route path='/' exact component={StartPage} />
           <Route path='/identificator' component={Identificator} />
           <Route path='/data' component={Data} />
+          <Route path='/document' component={Document} />
+          
         </Switch>
       </div>
     </BrowserRouter>

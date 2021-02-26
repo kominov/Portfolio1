@@ -18,3 +18,17 @@ export interface IDataErrors {
     validationCost:boolean
     btnValid:boolean
 }
+export interface IDoc{
+    docname: string
+    username:string
+    date:string
+    comment:string
+}
+export interface IDocErrors{
+    errorMessage:{docname:string,username:string,date:string}
+    touched:{docname:boolean,username:boolean,date:boolean}
+    validationDocname: boolean
+    validationUsername:boolean
+    validationDate:boolean
+    btnValid:boolean
+}
