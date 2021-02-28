@@ -7,10 +7,7 @@ export const Document: React.FC = () => {
         return {
             errorMessage: { docname: "", username: "", date: "" },
             touched: { docname: false, username: false, date: false },
-            validationDocname: false,
-            validationUsername: false,
-            validationDate: false,
-            btnValid: false
+            validationDocname: false, validationUsername: false, validationDate: false, btnValid: false
         }
     }
 
@@ -25,8 +22,7 @@ export const Document: React.FC = () => {
     }, []);
     useEffect(() => {
         localStorage.setItem('document', JSON.stringify(document));
-    }, [document])
-
+    }, [document]) 
     //обрабатываем инпуты
     const handlerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -50,24 +46,25 @@ export const Document: React.FC = () => {
             case 'username':
                 validationUsername = value.length > 5;
                 errorMessage.username = validationUsername ? "" : "ФИО должно содержать минимум 6 символов";
-                touched.username=validationUsername;
+                touched.username = validationUsername;
                 break;
             case 'date':
                 let userDate = Date.parse(value);
                 let dateNow = Date.now();
                 let totalDate = Math.round((userDate - dateNow) / 3600000);
                 validationDate = totalDate > 120;
-                errorMessage.date = validationDate?'':'Вы ввели некорректную дату, либо до даты начала работ меньше 5 дней. Измените дату на более поздний срок!'
+                errorMessage.date = validationDate ? '' : 'Вы ввели некорректную дату, либо до даты начала работ меньше 5 дней. Измените дату на более поздний срок!'
                 touched.date = validationDate;
                 break;
-
             default:
                 break;
         }
         btnValid = (validationDocname && validationUsername && validationDate);
         setErrors({ errorMessage, touched, validationDocname, validationUsername, validationDate, btnValid, })
     }
-
+    console.log(errors.validationDate);
+    console.log(errors.validationDocname);
+    console.log(errors.validationUsername);
     // const handlerErrorsOnFocus = (event: React.FocusEvent<HTMLInputElement>) => {
 
     //     let { errorMessage, touched, validationDocname, validationUsername, validationDate, btnValid } = errors;
@@ -91,16 +88,13 @@ export const Document: React.FC = () => {
     //     btnValid = (validationDocname && validationUsername && validationDate);
     //     setErrors({ errorMessage, touched, validationDocname, validationUsername, validationDate, btnValid, })
     // }
-    console.log(errors.validationDocname);
-    console.log(errors.validationUsername);
-    console.log(errors.validationDate);
+
     return (<>
         <div className={s.document__inner}>
-
             <div className="input__container mt-4">
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="brd__shadow__itput document__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Название</span>
+                        <span className="brd__shadow__itput document__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Название документа</span>
                     </div>
                     <input
                         // onBlur={handlerErrorsOnFocus}
@@ -109,12 +103,9 @@ export const Document: React.FC = () => {
                         placeholder="Введите название документа"
                         className={`brd__shadow__itput brdr__radius__input form-control data__input `}
                         name="docname"
-                        onChange={handlerInput}
-                    />
+                        onChange={handlerInput}/>
                     <div className={s.error__text}>{errors.errorMessage.docname}</div>
                 </div>
-
-
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
                         <span className="brd__shadow__itput document__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">ФИО исполнителя</span>
@@ -126,23 +117,20 @@ export const Document: React.FC = () => {
                         value={document.username}
                         className={`brd__shadow__itput form-control data__input  `}
                         name="username"
-                        onChange={handlerInput}
-                    />
+                        onChange={handlerInput}/>
                     <div className={s.error__text}>{errors.errorMessage.username}</div>
                 </div>
                 <div className="input-group mb-3">
                     <div className=" input-group-prepend">
                         <span className="brd__shadow__itput brd_shadow document__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Дата начала работ</span>
                     </div>
-
                     <input
                         type="date"
                         value={document.date}
                         placeholder="Введите дату"
                         className={`brd__shadow__itput form-control data__input  `}
                         name="date"
-                        onChange={handlerInput}
-                    />
+                        onChange={handlerInput}/>
                 </div>
                 <div className={s.error__text}>{errors.errorMessage.date}</div>
                 <div className="form-floating">
@@ -154,13 +142,11 @@ export const Document: React.FC = () => {
                         onChange={handlerTextarea}></textarea>
                     <label htmlFor="floatingTextarea">Описание</label>
                 </div>
-
             </div>
-
             <div className="mt-2">
                 <button onClick={() => { history.push('/data') }} className="brd__shadow__itput m2 btn btn-primary"
                 >Назад</button>
-                <button disabled={!errors.btnValid} onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
+                <button disabled={!errors.btnValid} onClick={() => { history.push('/checkpage') }} className="brd__shadow__itput m2 btn btn-primary"
                 >Далее</button>
             </div>
         </div>

@@ -58,7 +58,7 @@ export const Data: React.FC = () => {
 
             <button onClick={() => { history.push('/') }} className="brd__shadow__itput m2 btn btn-primary"
             >Назад</button>
-            <button onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
+            <button disabled={dataDraw.length<1} onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
             >Далее</button>
         </div >
     )

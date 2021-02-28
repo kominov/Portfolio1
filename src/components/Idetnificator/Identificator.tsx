@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IId } from '../../interfaces';
 import classNames from 'classnames';
 import s from './Identificator.module.css'
-
+import { useHistory } from 'react-router-dom';
 export const Identificator: React.FC = () => {
+    const history = useHistory();
     const refId = useRef<HTMLInputElement>(null);
     const [id, setId] = useState<IId[]>([])
-    
+
 
     //проверяем есть ли что-то в сторедже, если есть, добавляем в стейт
     useEffect(() => {
@@ -27,7 +28,6 @@ export const Identificator: React.FC = () => {
         }
         setId(prev => [newId, ...id]);
     }
-    console.log(id)
     //удаляем ид
     const delHandlerId = (id: number, event: React.MouseEvent) => {
         setId(prev => prev.filter(item => item.key !== id))
@@ -60,7 +60,7 @@ export const Identificator: React.FC = () => {
                 return (
                     <div className={s.id__item} key={items.key}>
                         <span className="alert alert-dark" role="alert">
-                            Идентификатор: {items.identificator}
+                            <span className={s.span__text}>Идентификатор:</span> {items.identificator}
                         </span>
                         <i className={`material-icons ${s.id__icon}`}
                             onClick={event => delHandlerId(items.key, event)}
@@ -69,6 +69,12 @@ export const Identificator: React.FC = () => {
 
                 )
             })}
+        </div>
+        <div className="mt-2">
+            <button onClick={() => { history.push('/data') }} className="brd__shadow__itput m2 btn btn-primary"
+            >Назад</button>
+            <button disabled={id.length < 1} onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
+            >Далее</button>
         </div>
     </>)
 }
