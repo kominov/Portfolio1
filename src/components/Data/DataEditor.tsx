@@ -7,7 +7,7 @@ interface DateEditorProps {
     onSave: (data: IData) => void;
 }
 
-export const InputEditor: React.FC<DateEditorProps> = ({ onSave }) => {
+export const DataEditor: React.FC<DateEditorProps> = ({ onSave }) => {
     //обнуление стейта с ошибками
     function getDefaultErrorsState(): IDataErrors {
         return {
@@ -94,7 +94,7 @@ export const InputEditor: React.FC<DateEditorProps> = ({ onSave }) => {
                     <span className="brd__shadow__itput data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Количество</span>
                 </div>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Введите количество"
                     value={dataInput.amount}
                     className={`brd__shadow__itput form-control data__input  ${errorClass(errors.touched.amount)}`}
@@ -106,7 +106,7 @@ export const InputEditor: React.FC<DateEditorProps> = ({ onSave }) => {
                     <span className="brd__shadow__itput brd_shadow data__span input-group-text bg-primary text-white" id="inputGroup-sizing-default">Cтоимость</span>
                 </div>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Введите сумму"
                     value={dataInput.cost}
                     className={`brd__shadow__itput form-control data__input  ${errorClass(errors.touched.cost)}`}

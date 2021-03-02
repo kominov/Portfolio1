@@ -10,10 +10,21 @@
   border-radius: 4px;
   border: 1px solid #bcbebf;
 }
+
 .id__icon{
     color: #F44336 !important;
 }
 .span__text{
     margin-left: 10px;
     font-weight: 700;
+}
+.data__table{
+    width: 50%;
+    margin-top: 40px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+.idcheck__inner{
+    /* width:50%; */
+    margin-top:25px;
 }

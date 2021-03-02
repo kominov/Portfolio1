@@ -1,8 +1,7 @@
 export interface IId {
     identificator: string
     key: number
-    complited: boolean
-}
+    }
 export interface IData {
     name:string
     amount:string
@@ -31,4 +30,9 @@ export interface IDocErrors{
     validationUsername:boolean
     validationDate:boolean
     btnValid:boolean
+}
+export interface DraftDocument {
+    ids: IId[];
+    data: IData[];
+    document: IDoc;
 }

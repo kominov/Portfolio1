@@ -4,27 +4,30 @@ import { IId } from '../../interfaces';
 import classNames from 'classnames';
 import s from './Identificator.module.css'
 import { useHistory } from 'react-router-dom';
-export const Identificator: React.FC = () => {
+interface InterfaceProps {
+    onSaveState: (idState: IId[]) => void;
+}
+
+export const Identificator: React.FC<InterfaceProps> = ({ onSaveState }) => {
     const history = useHistory();
     const refId = useRef<HTMLInputElement>(null);
     const [id, setId] = useState<IId[]>([])
 
 
     //проверяем есть ли что-то в сторедже, если есть, добавляем в стейт
-    useEffect(() => {
-        const saveId = JSON.parse(localStorage.getItem('identificator') || '[]') as IId[];
-        setId(saveId);
-    }, [])
-    //записываем в сторедж стейт, при добавление в него айди
-    useEffect(() => {
-        localStorage.setItem('identificator', JSON.stringify(id))
-    }, [id])
+    // useEffect(() => {
+    //     const saveId = JSON.parse(localStorage.getItem('identificator') || '[]') as IId[];
+    //     setId(saveId);
+    // }, [])
+    // //записываем в сторедж стейт, при добавление в него айди
+    // useEffect(() => {
+    //     localStorage.setItem('identificator', JSON.stringify(id))
+    // }, [id])
     //добавляем ид 
     const addHandlerId = (identificator: string) => {
         const newId = {
             identificator: identificator,
             key: Date.now(),
-            complited: false,
         }
         setId(prev => [newId, ...id]);
     }
@@ -73,7 +76,10 @@ export const Identificator: React.FC = () => {
         <div className="mt-2">
             <button onClick={() => { history.push('/data') }} className="brd__shadow__itput m2 btn btn-primary"
             >Назад</button>
-            <button disabled={id.length < 1} onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
+            <button disabled={id.length < 1} onClick={() => {
+                onSaveState(id)
+                history.push('/document')
+            }} className="brd__shadow__itput m2 btn btn-primary"
             >Далее</button>
         </div>
     </>)

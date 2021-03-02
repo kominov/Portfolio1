@@ -2,20 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { IData } from '../../interfaces';
 import s from './Data.module.css'
 import { useHistory } from 'react-router-dom'
-import { InputEditor } from './DataEditor';
-export const Data: React.FC = () => {
+import { DataEditor } from './DataEditor';
+
+interface dataProps {
+    onSaveState: (data: IData[]) => void;
+}
+
+export const Data: React.FC<dataProps> = ({ onSaveState }) => {
     const history = useHistory();
 
     // стейт для отрисовывания 
     const [dataDraw, setDataDraw] = useState<IData[]>([]);
 
-    useEffect(() => {
-        let save = JSON.parse(localStorage.getItem('data') || '[]') as IData[];
-        setDataDraw(save);
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(dataDraw));
-    }, [dataDraw])
+    // useEffect(() => {
+    //     let save = JSON.parse(localStorage.getItem('data') || '[]') as IData[];
+    //     setDataDraw(save);
+    // }, [])
+    // useEffect(() => {
+    //     localStorage.setItem('data', JSON.stringify(dataDraw));
+    // }, [dataDraw])
     //удаляем данные из таблицы
     const deleteDataHandler = (event: React.MouseEvent, id: number) => {
         setDataDraw(prev => prev.filter(item => item.key !== id))
@@ -23,7 +28,7 @@ export const Data: React.FC = () => {
 
     return (
         <div className={s.data__inner}>
-            <InputEditor onSave={draw => setDataDraw(prev => ([draw, ...prev]))} />
+            <DataEditor onSave={draw => setDataDraw(prev => ([draw, ...prev]))} />
             <div className={s.data__table}>
                 <table className="table table-primary ">
                     <thead>
@@ -58,7 +63,10 @@ export const Data: React.FC = () => {
 
             <button onClick={() => { history.push('/') }} className="brd__shadow__itput m2 btn btn-primary"
             >Назад</button>
-            <button disabled={dataDraw.length<1} onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary"
+            <button disabled={dataDraw.length < 1} onClick={() => {
+                onSaveState(dataDraw)
+                history.push('/document')
+            }} className="brd__shadow__itput m2 btn btn-primary"
             >Далее</button>
         </div >
     )
