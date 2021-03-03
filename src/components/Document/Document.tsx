@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { IDoc, IDocErrors } from '../../interfaces';
@@ -69,6 +70,13 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
         setErrors({ errorMessage, touched, validationDocname, validationUsername, validationDate, btnValid, })
     }
 
+    //Устанавливаем css свойства
+    const errorClass = (touched: boolean) => {
+        return (classNames({
+            ["has-error "]: !touched,
+            ["is-valid"]: !!touched,
+        }))
+    }
     return (<>
         <div className={s.document__inner}>
             <div className="input__container mt-4">
@@ -81,7 +89,7 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                         type="text"
                         value={document.docname}
                         placeholder="Введите название документа"
-                        className={`brd__shadow__itput brdr__radius__input form-control data__input `}
+                        className={`brd__shadow__itput brdr__radius__input form-control data__input ${errorClass(errors.touched.docname)}`}
                         name="docname"
                         onChange={handlerInput} />
                     <div className={s.error__text}>{errors.errorMessage.docname}</div>
@@ -95,7 +103,7 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                         type="text"
                         placeholder="Введите ФИО исполнителя"
                         value={document.username}
-                        className={`brd__shadow__itput form-control data__input  `}
+                        className={`brd__shadow__itput brdr__radius__input form-control data__input ${errorClass(errors.touched.username)} `}
                         name="username"
                         onChange={handlerInput} />
                     <div className={s.error__text}>{errors.errorMessage.username}</div>
@@ -108,7 +116,7 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                         type="date"
                         value={document.date}
                         placeholder="Введите дату"
-                        className={`brd__shadow__itput form-control data__input  `}
+                        className={`brd__shadow__itput form-control data__input ${errorClass(errors.touched.date)} `}
                         name="date"
                         onChange={handlerInput} />
                 </div>
@@ -124,12 +132,15 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                 </div>
             </div>
             <div className="mt-2">
-                <button onClick={() => { history.push('/data') }} className="brd__shadow__itput m2 btn btn-primary"
+                <button onClick={() => { history.goBack() }} className="brd__shadow__itput m2 btn btn-primary"
                 >Назад</button>
-                <button  onClick={() => {
-                    onSaveState(document)
-                    history.push('/checkpage')
-                }} className="brd__shadow__itput m2 btn btn-primary"
+                <button onClick={() => {
+                    if (errors.btnValid) {
+                        onSaveState(document);
+                        history.push('/checkpage');
+                    }
+                    else { alert("Не все поля заполнены корректно")}}}
+                    className="brd__shadow__itput m2 btn btn-primary"
                 >Далее</button>
             </div>
         </div>

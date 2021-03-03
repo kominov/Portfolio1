@@ -41,3 +41,9 @@
     min-width: 180px;
     text-align: center;
 }
+.navbar a{
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}

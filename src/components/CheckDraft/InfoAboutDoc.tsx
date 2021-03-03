@@ -18,11 +18,13 @@ export const InfoAboutDoc: React.FC<InfoDocProps> = ({draft}) => {
                 Дата начала работ:<span className={s.span__text}>{draft.document.date}</span>
             </span>
         </div>
-        <div className={`mt-4 ${s.id__item}`}>
+        {draft.document.comment.length >1?
+           ( <div className={`mt-4 ${s.id__item}`}>
             <span className="alert alert-dark" role="alert">
                 Описание:<span className={s.span__text}>{draft.document.comment}</span>
             </span>
-        </div>
+        </div>):""}
+        
         
 
     </>)

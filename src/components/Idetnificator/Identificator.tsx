@@ -74,7 +74,7 @@ export const Identificator: React.FC<InterfaceProps> = ({ onSaveState }) => {
             })}
         </div>
         <div className="mt-2">
-            <button onClick={() => { history.push('/data') }} className="brd__shadow__itput m2 btn btn-primary"
+            <button onClick={() => { history.push('/') }} className="brd__shadow__itput m2 btn btn-primary"
             >Назад</button>
             <button disabled={id.length < 1} onClick={() => {
                 onSaveState(id)

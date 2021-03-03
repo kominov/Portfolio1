@@ -71,7 +71,7 @@ export const DataEditor: React.FC<DateEditorProps> = ({ onSave }) => {
             ["is-valid"]: !!touched,
         }))
     }
-    
+
     return <>
         <div className={s.data__information}>
             <div className="input-group mb-3">
