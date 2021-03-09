@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StartPage } from './components/StartPage/StartPage';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, useHistory, useLocation } from 'react-router-dom'
 
 import { Header } from './components/Header/Header';
-import { Draft } from './Draft';
+import { Draft } from './components/CheckDraft/Draft';
+import { CleanCopy } from './components/CleanCopy/CleanCopy';
+import { ApprovalDocument, Status } from './interfaces/interfaces';
+
 
 
 function App() {
+  const [approvalDocument, setApprovalDocument] = useState<ApprovalDocument>();
+  const showDraft = !document.location.pathname.startsWith('/cleancopy');
+  console.log(approvalDocument, showDraft);
+
+  const handlerApprovalDocument = (stat: Status) => {
+    if (approvalDocument) {
+      setApprovalDocument({ ...approvalDocument, status: stat })
+    }
+  }
   return (
     <BrowserRouter>
-      <Header />
-      <div className="container">
-        <Switch>
-          <Route path='/' exact component={StartPage} />
-          <Draft />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path='/' exact component={StartPage} />
+        {showDraft && <Draft approvalDocument={approvalDocument} onSave={setApprovalDocument} />}
+        <CleanCopy approvalDocument={approvalDocument} onSave={status => handlerApprovalDocument(status)} />
+      </Switch>
+
     </BrowserRouter>
   );
 }

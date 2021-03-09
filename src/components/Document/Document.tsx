@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { IDoc, IDocErrors } from '../../interfaces';
+import { IDoc, IDocErrors } from '../../interfaces/interfaces';
 import s from './Document.module.css'
 interface DocProps {
     onSaveState: (date: IDoc) => void;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IData } from '../../interfaces';
+import { IData } from '../../interfaces/interfaces';
 import s from './Data.module.css'
 import { useHistory } from 'react-router-dom'
 import { DataEditor } from './DataEditor';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import s from './Data.module.css'
-import { IData, IDataErrors } from '../../interfaces'
+import { IData, IDataErrors } from '../../interfaces/interfaces'
 
 interface DateEditorProps {
     onSave: (data: IData) => void;

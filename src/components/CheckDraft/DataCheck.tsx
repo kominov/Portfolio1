@@ -1,9 +1,9 @@
 import React from 'react'
-import { DraftDocument } from '../../interfaces'
+import { DraftDocument } from '../../interfaces/interfaces'
 import s from './CheckDraft.module.css'
 
 interface DataCheckProps {
-    draft: DraftDocument
+    draft: DraftDocument|undefined
 }
 export const DataCheck: React.FC<DataCheckProps> = ({ draft }) => {
     return (<>
@@ -18,11 +18,11 @@ export const DataCheck: React.FC<DataCheckProps> = ({ draft }) => {
                 </thead>
                 <tbody>
 
-                    {draft.data.map(dataCheck => (
+                    {draft!.data.map(dataCheck => (
                         <tr key={dataCheck.key}>
                             <td>{dataCheck.name}</td>
-                            <td>{dataCheck.cost}</td>
                             <td>{dataCheck.amount}</td>
+                            <td>{dataCheck.cost}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import { IId } from '../../interfaces';
+import { IId } from '../../interfaces/interfaces';
 import classNames from 'classnames';
 import s from './Identificator.module.css'
 import { useHistory } from 'react-router-dom';

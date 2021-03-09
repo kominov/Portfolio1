@@ -1,8 +1,8 @@
 import React from 'react'
-import { DraftDocument } from '../../interfaces'
+import { DraftDocument } from '../../interfaces/interfaces'
 import s from './CheckDraft.module.css'
 interface IdCheckProps {
-    draft: DraftDocument
+    draft: DraftDocument|undefined
 }
 export const IdCheck: React.FC<IdCheckProps> = ({ draft }) => {
     return (<>
@@ -16,7 +16,7 @@ export const IdCheck: React.FC<IdCheckProps> = ({ draft }) => {
                 </thead>
                 <tbody>
 
-                    {draft.ids.map(IdCheck => (
+                    {draft!.ids.map(IdCheck => (
                         <tr key={IdCheck.key}>
                             <td>{IdCheck.identificator}</td>
                         </tr>
