@@ -15,14 +15,14 @@ export const Identificator: React.FC<InterfaceProps> = ({ onSaveState }) => {
 
 
     //проверяем есть ли что-то в сторедже, если есть, добавляем в стейт
-    // useEffect(() => {
-    //     const saveId = JSON.parse(localStorage.getItem('identificator') || '[]') as IId[];
-    //     setId(saveId);
-    // }, [])
-    // //записываем в сторедж стейт, при добавление в него айди
-    // useEffect(() => {
-    //     localStorage.setItem('identificator', JSON.stringify(id))
-    // }, [id])
+    useEffect(() => {
+        const saveId = JSON.parse(localStorage.getItem('identificator') || '[]') as IId[];
+        setId(saveId);
+    }, [])
+    //записываем в сторедж стейт, при добавление в него айди
+    useEffect(() => {
+        localStorage.setItem('identificator', JSON.stringify(id))
+    }, [id])
     //добавляем ид 
     const addHandlerId = (identificator: string) => {
         const newId = {

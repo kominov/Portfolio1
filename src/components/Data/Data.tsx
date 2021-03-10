@@ -14,13 +14,13 @@ export const Data: React.FC<dataProps> = ({ onSaveState }) => {
     // стейт для отрисовывания 
     const [dataDraw, setDataDraw] = useState<IData[]>([]);
 
-    // useEffect(() => {
-    //     let save = JSON.parse(localStorage.getItem('data') || '[]') as IData[];
-    //     setDataDraw(save);
-    // }, [])
-    // useEffect(() => {
-    //     localStorage.setItem('data', JSON.stringify(dataDraw));
-    // }, [dataDraw])
+    useEffect(() => {
+        let save = JSON.parse(localStorage.getItem('data') || '[]') as IData[];
+        setDataDraw(save);
+    }, [])
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(dataDraw));
+    }, [dataDraw])
     //удаляем данные из таблицы
     const deleteDataHandler = (event: React.MouseEvent, id: number) => {
         setDataDraw(prev => prev.filter(item => item.key !== id))

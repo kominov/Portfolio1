@@ -20,16 +20,21 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
     const [document, setDocument] = useState<IDoc>({ docname: "", username: "", date: "", comment: "" });
     //стейт для ошибок
     const [errors, setErrors] = useState<IDocErrors>(getDefaultErrorsState);
-    // useEffect(() => {
-    //     const save = localStorage.getItem('document');
-    //     if (save) {
-    //         setDocument(JSON.parse(save));
-    //     }
+    useEffect(() => {
+        const save = localStorage.getItem('document');
+        const errors = localStorage.getItem('errorsDoc')
+        if (save && errors) {
+            setDocument(JSON.parse(save));
+            setErrors(JSON.parse(errors));
+        }
 
-    // }, []);
-    // useEffect(() => {
-    //     localStorage.setItem('document', JSON.stringify(document));
-    // }, [document])
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('document', JSON.stringify(document));
+    }, [document])
+    useEffect(() => {
+        localStorage.setItem('errorsDoc', JSON.stringify(errors));
+    }, [document])
     //обрабатываем инпуты
     const handlerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -135,11 +140,10 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                 <button onClick={() => { history.goBack() }} className="brd__shadow__itput m2 btn btn-primary"
                 >Назад</button>
                 <button onClick={() => {
-                    if (errors.btnValid) {
-                        onSaveState(document);
-                        history.push('/draft/checkpage');
-                    }
-                    else { alert("Не все поля заполнены корректно")}}}
+                    onSaveState(document);
+                    history.push('/draft/checkpage');
+                }}
+                    disabled={!errors.btnValid}
                     className="brd__shadow__itput m2 btn btn-primary"
                 >Далее</button>
             </div>
