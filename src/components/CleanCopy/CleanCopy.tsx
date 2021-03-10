@@ -14,7 +14,7 @@ interface CleanCopyProps {
 
 export const CleanCopy: React.FunctionComponent<CleanCopyProps> = ({ onSave, approvalDocument }) => {
     return (<>
-        <Header title={approvalDocument!.status} />
+        <Header title={approvalDocument!.status} status={approvalDocument?.status} />
         <div className="container">
 
             <InfoAboutDoc draft={approvalDocument?.dataDraft} />

@@ -21,8 +21,8 @@ export const StartPage: React.FC = () => {
     function handleClick() {
 
 
-        if (docType == "data") history.push('/data')
-        if (docType == "identificator") history.push('/identificator')
+        if (docType == "data") history.push('/draft/data')
+        if (docType == "identificator") history.push('/draft/identificator')
 
     }
     return (

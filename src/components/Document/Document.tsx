@@ -137,7 +137,7 @@ export const Document: React.FC<DocProps> = ({ onSaveState }) => {
                 <button onClick={() => {
                     if (errors.btnValid) {
                         onSaveState(document);
-                        history.push('/checkpage');
+                        history.push('/draft/checkpage');
                     }
                     else { alert("Не все поля заполнены корректно")}}}
                     className="brd__shadow__itput m2 btn btn-primary"

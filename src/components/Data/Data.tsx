@@ -65,7 +65,7 @@ export const Data: React.FC<dataProps> = ({ onSaveState }) => {
             >Назад</button>
             <button disabled={dataDraw.length < 1} onClick={() => {
                 onSaveState(dataDraw)
-                history.push('/document')
+                history.push('/draft/document')
             }} className="brd__shadow__itput m2 btn btn-primary"
             >Далее</button>
         </div >

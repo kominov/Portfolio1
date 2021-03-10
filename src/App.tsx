@@ -23,8 +23,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={StartPage} />
-        {showDraft && <Draft approvalDocument={approvalDocument} onSave={setApprovalDocument} />}
-        <CleanCopy approvalDocument={approvalDocument} onSave={status => handlerApprovalDocument(status)} />
+        <Route path='/draft' render={() => <Draft approvalDocument={approvalDocument} onSave={setApprovalDocument} />} />
+        <Route path='/cleancopy' render={() => <CleanCopy approvalDocument={approvalDocument} onSave={status => handlerApprovalDocument(status)} />} />
       </Switch>
 
     </BrowserRouter>

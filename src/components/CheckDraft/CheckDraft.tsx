@@ -12,14 +12,14 @@ interface CheckProps {
 export const CheckDraft: React.FC<CheckProps> = ({ draft, onSave }) => {
     const history = useHistory();
     const checkDataType = (event: React.MouseEvent<HTMLButtonElement>) => {
-        draft.ids.length > 0 ? history.push('/cleancopy/id') : history.push('/cleancopy/data')
-        onSave({ dataDraft: draft, status: draft.ids.length > 0 ? Status.approval : Status.checking })
+        history.push('/cleancopy');
+        onSave({ dataDraft: draft, status: draft.ids.length > 0 ? Status.approval : Status.checking });
     }
 
     return (<>
         <InfoAboutDoc draft={draft} />
         {draft.data.length >= 1 ? <DataCheck draft={draft} /> : <IdCheck draft={draft} />}
-        <button onClick={() => { history.push('/document') }} className="brd__shadow__itput m2 btn btn-primary">Назад</button>
+        <button onClick={() => { history.push('/draft/document') }} className="brd__shadow__itput m2 btn btn-primary">Назад</button>
         <button onClick={(e) => checkDataType(e)} className="brd__shadow__itput m2 btn btn-primary">Далее</button>
     </>)
 }

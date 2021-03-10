@@ -19,10 +19,10 @@ export const Draft: React.FC<DraftProps> = ({ approvalDocument, onSave }) => {
         <Header title={"Черновик"} />
         <div className="container">
             <Switch>
-                <Route path='/identificator' render={() => <Identificator onSaveState={ids => setDraft(state => ({ ...state, ids }))} />} />
-                <Route path='/data' render={() => <Data onSaveState={data => setDraft(state => ({ ...state, data }))} />} />
-                <Route path='/document' render={() => <Document onSaveState={document => setDraft(state => ({ ...state, document }))} />} />
-                <Route path='/checkpage' render={() => <CheckDraft draft={draft} onSave={onSave} />} />
+                <Route path='/draft/identificator' render={() => <Identificator onSaveState={ids => setDraft(state => ({ ...state, ids }))} />} />
+                <Route path='/draft/data' render={() => <Data onSaveState={data => setDraft(state => ({ ...state, data }))} />} />
+                <Route path='/draft/document' render={() => <Document onSaveState={document => setDraft(state => ({ ...state, document }))} />} />
+                <Route path='/draft/checkpage' render={() => <CheckDraft draft={draft} onSave={onSave} />} />
             </Switch>
         </div>
 
